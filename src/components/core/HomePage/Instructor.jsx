@@ -1,0 +1,42 @@
+import React from "react";
+import CTAButton from "./Button";
+import{FaArrowRight} from "react-icons/fa";
+import instructor from "../../../assets/Images/Instructor.png"
+import HighLightText from "./HighLightText";
+
+const Instructor =() => {
+    return (
+        <div>
+            <div className="flex flex-col-reverse lg:flex-row gap-20 items-center">
+                <div className="lg:w-[50%]">
+                    <img
+                    src={instructor}
+                    alt="InstructorkaImage"
+                    className="shadow-white shadow-[-15px_-15px_0_0]"
+                    />
+                </div>
+                <div className="lg:w-[50%] flex flex-col gap-10">
+                    <p className="lg:w-[50%] text-4xl font-semibold">
+                        Become an
+                        <HighLightText text={" instructor"}/>
+                    </p>
+                    <p className="font-medium text-[16px] text-justify w-[90%] text-richblack-300">
+                    Instructors from around the world teach millions of students on
+                    StudyNotion. We provide the tools and skills to teach what you
+                    love.
+                    </p>
+                    <div className="w-fit">
+                    <CTAButton active={true} linkto={"/signup"}>
+                        <div className="flex items-center gap-3">
+                        Start Teaching Today
+                        <FaArrowRight />
+                        </div>
+                    </CTAButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Instructor
