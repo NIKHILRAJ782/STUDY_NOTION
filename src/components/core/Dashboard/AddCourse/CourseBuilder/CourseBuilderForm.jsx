@@ -64,10 +64,10 @@ const CourseBuilderForm = () => {
     }
 
     const goToNext = () => {
-        if(course?.courseContent?.length===0)
+        if(course.courseContent.length===0)
         {
-            toast.error("Please add atleast one section");
-            return;
+            toast.error("Please add atleast one section")
+            return
         }
         if( course.courseContent.some((section) => section.subSection.length === 0)) 
         {
@@ -138,8 +138,10 @@ const CourseBuilderForm = () => {
 
             {/* Next Back Button */}
             <div className="flex gap-x-2 justify-end">
-                <button onClick={goBack} className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-5 font-semibold text-richblack-900 ">Back</button>
-                <IconBtn disabled={loading} text="Next" onClick={goToNext}>
+                <button onClick={goBack} className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-5 font-semibold text-richblack-900 ">
+                    Back
+                </button>
+                <IconBtn disabled={loading} text="Next" onclick={goToNext}>
                     <MdNavigateNext/>
                 </IconBtn>
             </div>

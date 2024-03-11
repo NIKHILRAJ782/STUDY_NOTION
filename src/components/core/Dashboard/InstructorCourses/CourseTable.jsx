@@ -24,7 +24,7 @@ export default function CoursesTable({ courses, setCourses }) {
   const { token } = useSelector((state) => state.auth)
   const [loading, setLoading] = useState(false)
   const [confirmationModal, setConfirmationModal] = useState(null)
-  const TRUNCATE_LENGTH = 30
+  const MAX_LENGTH = 25
 
   const handleCourseDelete = async (courseId) => {
     setLoading(true)
@@ -84,10 +84,10 @@ export default function CoursesTable({ courses, setCourses }) {
                     </p>
                     <p className="text-xs text-richblack-300">
                       {course.courseDescription.split(" ").length >
-                      TRUNCATE_LENGTH
+                      MAX_LENGTH
                         ? course.courseDescription
                             .split(" ")
-                            .slice(0, TRUNCATE_LENGTH)
+                            .slice(0, MAX_LENGTH)
                             .join(" ") + "..."
                         : course.courseDescription}
                     </p>

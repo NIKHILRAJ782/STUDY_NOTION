@@ -49,7 +49,6 @@ const NestedView = ({handleChangeEditSectionName}) => {
         setConfirmationModal(null)
     }
 
-
     return(
         <>
             <div className="rounded-lg bg-richblack-700 p-6 px-8">
@@ -98,7 +97,9 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                     <p className="font-semibold text-richblack-50">{data.title}</p>
                                 </div>
                                 <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-x-3">
-                                    <button onClick={() => setEditSubSection({...data,sectionId:section._id})}>
+                                    <button onClick={() =>
+                                        setEditSubSection({ ...data, sectionId:section._id })
+                                    }>
                                         <MdEdit className="text-xl text-richblack-300"/>
                                     </button>
                                     <button
@@ -136,12 +137,12 @@ const NestedView = ({handleChangeEditSectionName}) => {
                 (<SubSectionModal
                     modalData={viewSubSection}
                     setModalData={setViewSubSection}
-                    add={true}/>) 
+                    view={true}/>) 
                 : editSubSection ? 
                 (<SubSectionModal
                     modalData={editSubSection}
                     setModalData={setEditSubSection}
-                    add={true}/>) 
+                    edit={true}/>) 
                 : ( <></>)
             }
             {/* Confirmation modal */}

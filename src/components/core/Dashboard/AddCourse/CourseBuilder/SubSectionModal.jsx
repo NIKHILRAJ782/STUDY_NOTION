@@ -16,14 +16,18 @@ const SubSectionModal = ({
   view = false,
   edit = false,
 }) => {
-
+  
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
     getValues,
-  } = useForm();
+  } = useForm()
+
+  // console.log("view", view)
+  // console.log("edit", edit)
+  // console.log("add", add)
 
   const dispatch = useDispatch();
   const[loading,setLoading] = useState(false);
@@ -36,7 +40,7 @@ const SubSectionModal = ({
       setValue("lectureDesc",modalData.description);
       setValue("lectureVideo",modalData.videoUrl);
     }
-  })
+  },[])
 
   const isFormUpdated = () => {
     const currentValues = getValues();
@@ -122,7 +126,7 @@ const SubSectionModal = ({
             {/* modal header */}
             <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
               <p className="text-xl font-semibold text-richblack-5">
-                {view && "Viewing"} {add && "Adding"} {edit && "Editing"}
+                {view && "Viewing"} {add && "Adding"} {edit && "Editing"} {" "}
                 Lecture
               </p>
               <button onClick={() => (!loading ? setModalData(null) : {})}>

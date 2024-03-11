@@ -7,7 +7,7 @@ exports.auth = (req,res,next) => {
     try{
         //extract jwt token
 
-        const token = req.body.token|| req.cookies.token || req.header("Authorisation").replace("Bearer ","");
+        const token = req.body.token|| req.cookies.token || req.header("Authorization").replace("Bearer ","");
 
 
         if(!token){
