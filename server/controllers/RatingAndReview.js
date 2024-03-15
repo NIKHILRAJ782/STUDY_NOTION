@@ -13,7 +13,7 @@ exports.createRating = async(req,res) => {
         const courseDetails = await Course.findOne(
                             {
                                 _id:courseId,
-                                studentsEnrolled: {$elemMath: {$eq: userId}},
+                                studentsEnrolled: {$elemMatch: {$eq: userId}},
 
                             });
         if(!courseDetails){
@@ -118,7 +118,7 @@ exports.getAllRating = async(req,res) => {
         const allReviews = await RatingAndReview.find({})
                             .sort({rating:"desc"})
                             .populate({
-                                path:"true",
+                                path:"user",
                                 select:"firstName lastName email image",
                             })
                             .populate({
@@ -129,7 +129,8 @@ exports.getAllRating = async(req,res) => {
     
         return res.status(200).json({
             success:true,
-            message:'Student is not enrolled in the course',
+            message:"All reviews fetched successfully",
+            data:allReviews,
         });
     
     }

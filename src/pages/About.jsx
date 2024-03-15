@@ -3,7 +3,7 @@ import FoundingStory from "../assets/Images/FoundingStory.png"
 import BannerImage1 from "../assets/Images/aboutus1.webp"
 import BannerImage2 from "../assets/Images/aboutus2.webp"
 import BannerImage3 from "../assets/Images/aboutus3.webp"
-import ReviewSlide from "../components/common/ReviewSlide"
+import ReviewSlider from "../components/common/ReviewSlide"
 import HighLightText from "../components/core/HomePage/HighLightText"
 import Quote from "../components/core/AboutPage/Quote";
 import Stats from "../components/core/AboutPage/Stats";
@@ -119,7 +119,7 @@ const About = () =>{
                 <h1 className="text-center text-4xl font-semibold mt-8">
                 Reviews from other learners
                 </h1>
-                <ReviewSlide />
+                <ReviewSlider />
             </div>
 
             <Footer/>

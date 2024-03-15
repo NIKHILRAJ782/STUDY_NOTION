@@ -22,6 +22,11 @@ import MyCourses from "./components/core/Dashboard/MyCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import Issue from "./components/common/Issue";
 import EditCourse from "./components/core/Dashboard/EditCourse";
+import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetails";
+import ViewCourse from "./pages/ViewCourse";
+import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard/Instructor";
 
 
 function App() {
@@ -34,6 +39,9 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path ="/" element={<Home/>} />
+        <Route path ="/catalog/:catalogName" element={<Catalog/>} />
+        <Route path ="/courses/:courseId" element={<CourseDetails/>} />
+
         <Route path="login" element={<Login/>} />
         <Route path ="/signup" element={<Signup/>} />
         <Route path ="/forgot-password" element={<ForgotPassword/>} />
@@ -63,14 +71,27 @@ function App() {
               />
               <Route path="dashboard/add-course" element={<AddCourse/>}
               />
+              <Route path="dashboard/instructor" element={<InstructorDashboard/>}
+              />
               <Route path="dashboard/edit-course/:courseId" element={<EditCourse/>}
               />
             </>
           )}
         </Route>
         <Route path="*" element={<Error />} />
+        <Route element={
+          <PrivateRoute>
+            <ViewCourse/>
+          </PrivateRoute>
+        }>
+          {
+            user?.accountType === ACCOUNT_TYPE.STUDENT  && (
+              <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails/>}/>
+            )
+          }
+        </Route>
       </Routes>
-      <div className="fixed top-[93vh] right-[4vw] lg:right-[2vw]">
+      <div className="fixed top-[93vh] right-[4vw] lg:right-[2vw] z-[1000]">
         <Issue/>
       </div>
     </div>

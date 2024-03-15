@@ -31,7 +31,7 @@ const ExploreMore = () => {
         <div>
             {/* Explore more section */}
             <div className="text-4xl font-semibold text-center mt-10 lg:mb-10">
-                Unlock the
+                Unlock the{" "}
                 <div className="block lg:hidden h-[1px]"></div>
                 <HighLightText text={"Power of Code"} />
                 <div className="hidden sm:block h-[3px]"></div>

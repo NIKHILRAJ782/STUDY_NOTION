@@ -1,5 +1,5 @@
-const CourseProgress = require("../models/CourseProgess");
 const SubSection = require("../models/subSection");
+const CourseProgress = require("../models/CourseProgess")
 
 
 exports.updateCourseProgress = async(req,res) => {
@@ -11,7 +11,7 @@ exports.updateCourseProgress = async(req,res) => {
         const subSection = await SubSection.findById(subSectionId);
 
         if(!subSection) {
-            return res.status(404).json({error:"Invalid SUbSection"});
+            return res.status(404).json({error:"Invalid SubSection"});
         }
 
         console.log("SubSection Validation Done");
@@ -21,7 +21,9 @@ exports.updateCourseProgress = async(req,res) => {
             courseID:courseId,
             userId:userId,
         });
+        console.log("course progress-> ",courseProgress);
         if(!courseProgress) {
+            console.log("here below subsection")
             return res.status(404).json({
                 success:false,
                 message:"Course Progress does not exist"

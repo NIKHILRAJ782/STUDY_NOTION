@@ -19,18 +19,16 @@ const Navbar = () => {
     const {user} = useSelector((state) => state.profile);
     const {totalItems} = useSelector((state) => state.cart);
     const location = useLocation();
-   // console.log("token is  :" , token);
 
     const [subLinks,setSubLinks] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isClose, setIsClose] = useState(false);
+    let [isClose, setIsClose] = useState(false);
 
     const fetchSubLinks = async () => {
         setLoading(true)
         try 
         {
             const result = await apiConnector("GET", categories.CATEGORIES_API);
-            console.log("Printing Sublinks result", result);
             if(result){
                 setSubLinks(result.data.data);
             }
@@ -90,7 +88,11 @@ const Navbar = () => {
                                         subLinks.length ? 
                                         (
                                             subLinks.map((subLink, index) => (
-                                                <Link to={`${subLink.link}`} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50" key={index}>
+                                                <Link to={`/catalog/${subLink.name
+                                                    .split(" ")
+                                                    .join("-")
+                                                    .toLowerCase()}`}
+                                                     className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50" key={index}>
                                                     <p>{subLink.name}</p>
                                                 </Link>
                                             ))

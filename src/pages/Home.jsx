@@ -9,7 +9,7 @@ import Footer from '../components/common/Footer';
 import TimeLineSection from '../components/core/HomePage/TimeLineSection';
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection';
 import Instructor from '../components/core/HomePage/Instructor';
-import ReviewSlide from '../components/common/ReviewSlide';
+import ReviewSlider from '../components/common/ReviewSlide';
 import ExploreMore from '../components/core/HomePage/ExploreMore';
 
 
@@ -169,7 +169,7 @@ const Home = () => {
                 <h1 className="text-center text-4xl font-semibold mt-8">
                 Reviews from other learners
                 </h1>
-                <ReviewSlide/>
+                <ReviewSlider/>
             </div>
 
             {/* Footer */}

@@ -11,19 +11,19 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 exports.createCourse = async(req,res) => {
     try{
         // Get user ID from request object
-		const userId = req.user.id;
+		    const userId = req.user.id;
         
         // Get all required fields from request body
-		let {
-			courseName,
-			courseDescription,
-			whatYouWillLearn,
-			price,
-			tag,
-			category,
-			status,
-			instructions,
-		} = req.body;
+        let {
+          courseName,
+          courseDescription,
+          whatYouWillLearn,
+          price,
+          tag,
+          category,
+          status,
+          instructions,
+        } = req.body;
 
         //get thumbnail
         const thumbnail = req.files.thumbnailImage;
@@ -43,13 +43,13 @@ exports.createCourse = async(req,res) => {
         }
         
         if (!status || status === undefined) {
-			status = "Draft";
-		}
+          status = "Draft";
+        }
 
         //check for instructor
         const instructorDetails = await User.findById(userId, {
-			accountType: "Instructor",
-		});
+          accountType: "Instructor",
+        });
         console.log("Instructor details ", instructorDetails);
 
         if(!instructorDetails){
@@ -74,31 +74,39 @@ exports.createCourse = async(req,res) => {
 
         //create an entry for new course
         const newCourse = await Course.create({
-            courseName,
-			courseDescription,
-			instructor: instructorDetails._id,
-			whatYouWillLearn: whatYouWillLearn,
-			price,
-			tag: tag,
-			category: categoryDetails._id,
-			thumbnail: thumbnailImage.secure_url,
-			status: status,
-			instructions: instructions,
+          courseName,
+          courseDescription,
+          instructor: instructorDetails._id,
+          whatYouWillLearn: whatYouWillLearn,
+          price,
+          tag: tag,
+          category: categoryDetails._id,
+          thumbnail: thumbnailImage.secure_url,
+          status: status,
+          instructions: instructions,
         });
 
         //add the new course to the user schema of Instructor
         await User.findByIdAndUpdate(
-            {_id: instructorDetails._id},
-            {
-                $push: {
-                    courses: newCourse._id,
-                }
-            },
-            {new:true},
+        {_id: instructorDetails._id},
+        {
+          $push: {
+            courses: newCourse._id,
+          }
+        },
+        {new:true},
         )
-
-        //update the tag schema
-        //TODO:Homework
+            
+        // Add the new course to the Categories
+        const categoryDetails2 = await Category.findByIdAndUpdate(
+          { _id: category },
+          {
+            $push: {
+              courses: newCourse._id,
+            },
+          },
+          { new: true }
+        )
 
         //return response
         return res.status(200).json({
@@ -224,7 +232,7 @@ exports.getCourseDetails = async(req,res) => {
         //get ID
         const {courseId} = req.body;
         //find course details
-        const courseDetails = await Course.find(
+        const courseDetails = await Course.findOne(
             {_id:courseId})
             .populate(
                 {
@@ -235,12 +243,13 @@ exports.getCourseDetails = async(req,res) => {
                 }
             )
             .populate("category")
-            //.populate("ratingAndreview")
+            .populate("ratingAndReviews")
             .populate({
                 path:"courseContent",
                 populate:{
                     path:"subSection",
-                }
+                    select: "-videoUrl",
+                },
             })
             .exec();
         //validation
@@ -250,12 +259,23 @@ exports.getCourseDetails = async(req,res) => {
                 message:`Could not find the course with ${courseId}`,
             });
         }
-
+        let totalDurationInSeconds = 0
+        courseDetails.courseContent.forEach((content) => {
+          content.subSection.forEach((subSection) => {
+            const timeDurationInSeconds = parseInt(subSection.timeDuration)
+            totalDurationInSeconds += timeDurationInSeconds
+          })
+        })
+    
+        const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
         //return response
         return res.status(200).json({
             success:true,
             message:"Course Details fetched successfully",
-            data:courseDetails,
+            data:{
+              courseDetails,
+              totalDuration,
+            },
         });
 
 	}
@@ -413,7 +433,7 @@ exports.deleteCourse = async (req, res) => {
         error: error.message,
       })
     }
-  }
+}
   
 exports.getAllCoursesData = async (req, res) => {
     try {
