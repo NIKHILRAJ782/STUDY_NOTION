@@ -78,7 +78,6 @@ function App() {
             </>
           )}
         </Route>
-        <Route path="*" element={<Error />} />
         <Route element={
           <PrivateRoute>
             <ViewCourse/>
@@ -87,9 +86,10 @@ function App() {
           {
             user?.accountType === ACCOUNT_TYPE.STUDENT  && (
               <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails/>}/>
-            )
-          }
+              )
+            }
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
       <div className="fixed top-[93vh] right-[4vw] lg:right-[2vw] z-[1000]">
         <Issue/>
