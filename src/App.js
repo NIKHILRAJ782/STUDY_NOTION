@@ -39,24 +39,24 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path ="/" element={<Home/>} />
-        <Route path ="/catalog/:catalogName" element={<Catalog/>} />
-        <Route path ="/courses/:courseId" element={<CourseDetails/>} />
-
-        <Route path="login" element={<Login/>} />
-        <Route path ="/signup" element={<Signup/>} />
-        <Route path ="/forgot-password" element={<ForgotPassword/>} />
-        <Route path ="/update-password/:id" element={<UpdatePassword/>} />
-        <Route path ="/verify-email" element={<VerifyEmail/>} />
         <Route path ="/about" element={<About/>} />
         <Route path ="/contact" element={<Contact/>} />
+        <Route path ="courses/:courseId" element={<CourseDetails/>} />
+        <Route path ="catalog/:catalogName" element={<Catalog/>} />
+
+        <Route path="login" element={<Login/>} />
+        <Route path ="signup" element={<Signup/>} />
+        <Route path ="forgot-password" element={<ForgotPassword/>} />
+        <Route path ="update-password/:id" element={<UpdatePassword/>} />
+        <Route path ="verify-email" element={<VerifyEmail/>} />
         <Route element={
         <PrivateRoute>
           <Dashboard />
         </PrivateRoute>
           }
         >
-          <Route path ="/dashboard/my-profile" element={<MyProfile/>} />
-          <Route path ="/dashboard/Settings" element={<Settings/>} />
+          <Route path ="dashboard/my-profile" element={<MyProfile/>} />
+          <Route path ="dashboard/Settings" element={<Settings/>} />
 
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <>
