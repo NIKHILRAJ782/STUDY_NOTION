@@ -22,7 +22,7 @@ export const apiConnector =async (method, url, bodyData, headers, params) => {
             headers:headers ? headers : null,
             params:params ? params : null,
         });
-        
+        console.log(result)
         return result;
     } catch (error) {
      console.log(`in api connector :  ${url}` , error); 
