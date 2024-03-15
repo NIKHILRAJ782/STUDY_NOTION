@@ -14,8 +14,9 @@ import axios from "axios";
 
 
 export const apiConnector =async (method, url, bodyData, headers, params) => {
+    let result;
     try {
-        const result = await axios({
+         result   = await axios({
             method : `${method}`,
             url : `${url}`,
             data:bodyData ? bodyData : null,
