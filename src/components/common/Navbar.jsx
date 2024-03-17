@@ -83,7 +83,7 @@ const Navbar = () => {
                                     </div>
                                     {
                                         loading ? (
-                                            <p className="text-center spinner">Loading...</p>
+                                            <p className="text-center">Loading...</p>
                                         ) :
                                         subLinks.length ? 
                                         (
