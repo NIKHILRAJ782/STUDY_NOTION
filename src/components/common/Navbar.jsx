@@ -28,8 +28,10 @@ const Navbar = () => {
         setLoading(true)
         try 
         {
+            console.log("calling the backend");
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             if(result){
+                console.log("called the backend" , result);
                 setSubLinks(result.data.data);
             }
         }
