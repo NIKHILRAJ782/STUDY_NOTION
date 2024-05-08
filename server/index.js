@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin:"https://study-notion-backend-4ew8.onrender.com",
+        origin:"https://edtech-study-notion-frontend-five.vercel.app",
         credentials:true,
     })
 )
