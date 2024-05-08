@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin:"https://edtech-study-notion-frontend-five.vercel.app/",
+        origin:"https://study-notion-backend-4ew8.onrender.com",
         credentials:true,
     })
 )
@@ -47,7 +47,7 @@ app.use("/api/v1/course",courseRoutes);
 app.use("/api/v1/reach",contactUsRoutes);
 
 app.listen(PORT, () => {
-	console.log(`Server is running on https://edtech-study-notion-frontend-five.vercel.app/${PORT}`);
+	console.log(`Server is running on https://study-notion-backend-4ew8.onrender.com`);
 });
 //def route
 app.get('/', (req, res) => {
