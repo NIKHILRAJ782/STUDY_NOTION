@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin:"http://localhost:3000",
+        origin:"https://study-notion-backend-4ew8.onrender.com/api/v1",
         credentials:true,
     })
 )
@@ -47,7 +47,7 @@ app.use("/api/v1/course",courseRoutes);
 app.use("/api/v1/reach",contactUsRoutes);
 
 app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+	console.log(`Server is running on https://study-notion-backend-4ew8.onrender.com/api/v1${PORT}`);
 });
 //def route
 app.get('/', (req, res) => {
